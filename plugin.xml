@@ -90,7 +90,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </js-module>
 
     <js-module src="www/ProgressEvent.js" name="ProgressEvent">
-        <clobbers target="window.ProgressEvent" />
+     <!--   <clobbers target="window.ProgressEvent" /> -->
     </js-module>
 
     <js-module src="www/fileSystems.js" name="fileSystems" />
