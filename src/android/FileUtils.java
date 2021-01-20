@@ -334,6 +334,10 @@ public class FileUtils extends CordovaPlugin {
                     int start = args.getInt(1);
                     int end = args.getInt(2);
                     String fname=args.getString(0);
+                    String nativeURL = resolveLocalFileSystemURI(fname).getString("nativeURL");
+                    if(needPermission(nativeURL, READ)) {
+                        getReadPermission(rawArgs, ACTION_GET_FILE, callbackContext);
+                    }
                     readFileAs(fname, start, end, callbackContext, null, PluginResult.MESSAGE_TYPE_ARRAYBUFFER);
                 }
             }, rawArgs, callbackContext);
