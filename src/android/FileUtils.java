@@ -330,10 +330,14 @@ public class FileUtils extends CordovaPlugin {
         }
         else if (action.equals("readAsArrayBuffer")) {
             threadhelper( new FileOp( ){
-                public void run(JSONArray args) throws JSONException, MalformedURLException  {
+                public void run(JSONArray args) throws JSONException, IOException  {
                     int start = args.getInt(1);
                     int end = args.getInt(2);
                     String fname=args.getString(0);
+                    String nativeURL = resolveLocalFileSystemURI(fname).getString("nativeURL");
+                    if(needPermission(nativeURL, READ)) {
+                        getReadPermission(rawArgs, ACTION_GET_FILE, callbackContext);
+                    }
                     readFileAs(fname, start, end, callbackContext, null, PluginResult.MESSAGE_TYPE_ARRAYBUFFER);
                 }
             }, rawArgs, callbackContext);
